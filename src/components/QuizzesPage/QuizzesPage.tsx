@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const quizzesData = [
-  { id: 1, title: 'Гарри Поттер', description: 'Описание квиза "Гарри Поттер"' },
+  { id: 1, title: 'Гарри Поттер', description: 'Проверьте свои знания о мире Гарри Поттера!' },
   { id: 2, title: 'Властелин колец', description: 'Описание квиза "Властелин колец"' },
   { id: 3, title: 'Злодеи в кино и литературе', description: 'Описание квиза "Злодеи в кино и литературе"' },
 ];
