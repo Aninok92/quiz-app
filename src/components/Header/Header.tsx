@@ -5,6 +5,7 @@ import { RootState } from '../../redux/store';
 import { logout } from '../../redux/userSlice';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import Logo from '../Logo/Logo';
+import Button from '../Button/Button'
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,11 +16,14 @@ const Header: React.FC = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/');
   };
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   return (
@@ -50,12 +54,9 @@ const Header: React.FC = () => {
                 {showDropdown && (
                   <div onMouseLeave={() => setShowDropdown(false)}>
                     <DropdownMenu>
-                      <button
-                        onClick={handleLogout}
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
-                      >
+                    <Button onClick={handleLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left">
                         Logout
-                      </button>
+                      </Button>
                       {/* Add more items here */}
                     </DropdownMenu>
                   </div>
@@ -63,7 +64,9 @@ const Header: React.FC = () => {
               </li>
             ) : (
               <li>
-                <Link to="/login" className="text-white hover:text-gray-300">Login</Link>
+                <Button onClick={handleLoginClick} className="bg-green-500 text-white">
+                  Login
+                </Button>
               </li>
             )}
           </ul>

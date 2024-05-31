@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { addResult } from '../../redux/quizSlice';
 import quizData, { Quiz } from '../../data/quizData';
+import Button from '../Button/Button';
 
 const QuizPage: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
@@ -61,13 +62,9 @@ const QuizPage: React.FC = () => {
           ))}
         </div>
       ))}
-      <button
-        onClick={handleSubmit}
-        disabled={!isQuizCompleted}
-        className={`mt-4 py-2 px-4 ${isQuizCompleted ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-      >
+     <Button onClick={handleSubmit} disabled={!isQuizCompleted}>
         Результат
-      </button>
+      </Button>
     </div>
   );
 };
