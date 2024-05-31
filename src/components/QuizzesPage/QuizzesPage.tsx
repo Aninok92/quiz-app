@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import quizData from '../../data/quizData';
 import PageTitle from '../PageTitle/PageTitle';
+import Container from '../Container/Container';
 
 const QuizzesPage: React.FC = () => {
   return (
-    <div className="container mx-auto p-4">
+    <Container>
        <PageTitle title={'Выберите квиз'} />
       <ul>
         {Object.values(quizData).map(quiz => (
@@ -14,7 +15,7 @@ const QuizzesPage: React.FC = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Container>
   );
 };
 

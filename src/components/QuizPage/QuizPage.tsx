@@ -6,6 +6,7 @@ import { addResult } from '../../redux/quizSlice';
 import quizData, { Quiz } from '../../data/quizData';
 import Button from '../Button/Button';
 import PageTitle from '../PageTitle/PageTitle';
+import Container from '../Container/Container';
 
 const QuizPage: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
@@ -44,7 +45,7 @@ const QuizPage: React.FC = () => {
   const isQuizCompleted = userAnswers.every(answer => answer !== '');
 
   return (
-    <div className="container mx-auto p-4">
+    <Container>
       <PageTitle title={quiz.title} />
       {quiz.questions.map((question, index) => (
         <div key={index} className="mb-4">
@@ -66,7 +67,7 @@ const QuizPage: React.FC = () => {
      <Button onClick={handleSubmit} disabled={!isQuizCompleted}>
         Результат
       </Button>
-    </div>
+    </Container>
   );
 };
 

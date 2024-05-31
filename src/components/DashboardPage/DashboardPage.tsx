@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import quizData, { Quiz } from '../../data/quizData';
 import PageTitle from '../PageTitle/PageTitle';
+import Container from '../Container/Container';
 
 const DashboardPage: React.FC = () => {
   const results = useSelector((state: RootState) => state.quiz.results);
   console.log('Loaded results:', results)
   
   return (
-    <div className="container mx-auto p-4">
+    <Container>
       <PageTitle title={'Dashboard!'} />
       <p>Добро пожаловать на панель управления!</p>
       {results.length > 0 ? (
@@ -37,7 +38,7 @@ const DashboardPage: React.FC = () => {
       ) : (
         <p>Вы ещё не прошли ни одного квиза.</p>
       )}
-    </div>
+    </Container>
   );
 };
 

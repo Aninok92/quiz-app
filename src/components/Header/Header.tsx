@@ -6,6 +6,7 @@ import { logout } from '../../redux/userSlice';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import Logo from '../Logo/Logo';
 import Button from '../Button/Button'
+import Container from '../Container/Container';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="bg-gray-800 py-4">
-      <div className="container mx-auto flex justify-between items-center">
+      <Container className="flex justify-between items-center">
         <div className="flex items-center">
           <Logo />
         </div>
@@ -71,7 +72,7 @@ const Header: React.FC = () => {
             )}
           </ul>
         </nav>
-      </div>
+      </Container>
     </header>
   );
 };

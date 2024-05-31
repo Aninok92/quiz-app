@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import PageTitle from '../PageTitle/PageTitle';
+import Container from '../Container/Container';
 
 const ResultPage = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const ResultPage = () => {
   }, 0);
 
   return (
-    <div className="container mx-auto p-4">
+    <Container>
       <PageTitle title={`Результаты квиза: ${quiz.title}`} /> 
       <p className="mb-4">Вы правильно ответили на {correctAnswersCount} из {quiz.questions.length} вопросов.</p>
       <div>
@@ -35,7 +36,7 @@ const ResultPage = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 };
 

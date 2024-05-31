@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../redux/userSlice';
 import PageTitle from '../PageTitle/PageTitle';
+import Container from '../Container/Container';
+import Button from '../Button/Button';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState(''); // Имитация поля пароля
+    const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
   
@@ -16,7 +18,7 @@ const LoginPage: React.FC = () => {
     };
   
     return (
-      <div className="container mx-auto p-4">
+      <Container>
         <PageTitle title={'Login'} />
         <input
           type="text"
@@ -32,10 +34,10 @@ const LoginPage: React.FC = () => {
           placeholder="Password"
           className="mb-4 p-2 border"
         />
-        <button onClick={handleLogin} className="py-2 px-4 bg-blue-500 text-white">
+        <Button onClick={handleLogin} className="py-2 px-4 bg-blue-500 text-white">
           Login
-        </button>
-      </div>
+        </Button>
+      </Container>
     );
   };
   
