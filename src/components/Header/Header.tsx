@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { logout } from '../../redux/userSlice';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import Logo from '../Logo/Logo';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,8 +25,8 @@ const Header: React.FC = () => {
   return (
     <header className="bg-gray-800 py-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div>
-          <h1 className="text-white text-xl font-bold">My quiz app</h1>
+        <div className="flex items-center">
+          <Logo />
         </div>
         <nav>
           <ul className="flex space-x-4">
