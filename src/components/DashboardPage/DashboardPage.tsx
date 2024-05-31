@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import quizData, { Quiz } from '../../data/quizData';
+import PageTitle from '../PageTitle/PageTitle';
 
 const DashboardPage: React.FC = () => {
   const results = useSelector((state: RootState) => state.quiz.results);
@@ -9,7 +10,7 @@ const DashboardPage: React.FC = () => {
   
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+      <PageTitle title={'Dashboard!'} />
       <p>Добро пожаловать на панель управления!</p>
       {results.length > 0 ? (
         <div>

@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import PageTitle from '../PageTitle/PageTitle';
 
 const ResultPage = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const ResultPage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Результаты квиза: {quiz.title}</h1>
+      <PageTitle title={`Результаты квиза: ${quiz.title}`} /> 
       <p className="mb-4">Вы правильно ответили на {correctAnswersCount} из {quiz.questions.length} вопросов.</p>
       <div>
         {quiz.questions.map((question: any, index: number) => (

@@ -5,6 +5,7 @@ import { RootState } from '../../redux/store';
 import { addResult } from '../../redux/quizSlice';
 import quizData, { Quiz } from '../../data/quizData';
 import Button from '../Button/Button';
+import PageTitle from '../PageTitle/PageTitle';
 
 const QuizPage: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
@@ -44,7 +45,7 @@ const QuizPage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">{quiz.title}</h1>
+      <PageTitle title={quiz.title} />
       {quiz.questions.map((question, index) => (
         <div key={index} className="mb-4">
           <h2 className="text-xl font-semibold mb-2">{question.question}</h2>
