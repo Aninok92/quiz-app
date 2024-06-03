@@ -5,6 +5,7 @@ import { login } from '../../redux/userSlice';
 import PageTitle from '../PageTitle/PageTitle';
 import Container from '../Container/Container';
 import Button from '../Button/Button';
+import InputField from '../InputField/InputField';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -20,19 +21,19 @@ const LoginPage: React.FC = () => {
     return (
       <Container>
         <PageTitle title={'Login'} />
-        <input
+        <InputField
           type="text"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          className="mb-4 p-2 border"
+          className="mb-4 w-full"
         />
-        <input
+        <InputField
           type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          className="mb-4 p-2 border"
+          className="mb-4 w-full"
         />
         <Button onClick={handleLogin} className="py-2 px-4 bg-blue-500 text-white">
           Login

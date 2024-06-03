@@ -7,6 +7,7 @@ import quizData, { Quiz } from '../../data/quizData';
 import Button from '../Button/Button';
 import PageTitle from '../PageTitle/PageTitle';
 import Container from '../Container/Container';
+import RadioInputField from '../RadioInputField/RadioInputField';
 
 const QuizPage: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
@@ -51,16 +52,14 @@ const QuizPage: React.FC = () => {
         <div key={index} className="mb-4">
           <h2 className="text-xl font-semibold mb-2">{question.question}</h2>
           {question.options.map((option, i) => (
-            <label key={i} className="block">
-              <input
-                type="radio"
-                name={`question-${index}`}
-                value={option}
-                checked={userAnswers[index] === option}
-                onChange={() => handleAnswerChange(index, option)}
-              />
-              {option}
-            </label>
+            <RadioInputField
+              key={i}
+              name={`question-${index}`}
+              value={option}
+              checked={userAnswers[index] === option}
+              onChange={() => handleAnswerChange(index, option)}
+              label={option}
+            />
           ))}
         </div>
       ))}
