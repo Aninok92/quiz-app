@@ -3,18 +3,25 @@ import { Link } from 'react-router-dom';
 import quizData from '../../data/quizData';
 import PageTitle from '../PageTitle/PageTitle';
 import Container from '../Container/Container';
+import Card from '../Card/Card';
 
 const QuizzesPage: React.FC = () => {
   return (
     <Container>
-       <PageTitle title={'Выберите квиз'} />
-      <ul>
-        {Object.values(quizData).map(quiz => (
-          <li key={quiz.id} className="mb-4">
-            <Link to={`/quizzes/${quiz.id}`} className="text-blue-500 hover:underline">{quiz.title}</Link>
-          </li>
+      <PageTitle title="Quizzes" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {Object.values(quizData).map((quiz) => (
+          <Link to={`/quizzes/${quiz.id}`} key={quiz.id}>
+            <Card
+              title={quiz.title}
+              description={quiz.description}
+              questionCount={quiz.questions.length}
+              className="transition-transform transform hover:scale-105"
+              imageUrl={quiz.imageUrl}
+            />
+          </Link>
         ))}
-      </ul>
+      </div>
     </Container>
   );
 };

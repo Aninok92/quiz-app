@@ -9,6 +9,7 @@ type Question = {
     title: string;
     description: string;
     questions: Question[];
+    imageUrl?: string;
   };
 
   const quizData: { [key: string]: Quiz } = {
@@ -67,7 +68,8 @@ type Question = {
           options: ['Северус Снегг', 'Ремус Люпин', 'Долорес Амбридж', 'Квиринус Квиррелл'],
           correctAnswer: 'Северус Снегг'
         }
-      ]
+      ],
+      imageUrl: "/images/harry_potter_quiz.jpg",
     },
     2: {
         id: 2,
@@ -77,7 +79,8 @@ type Question = {
           { question: 'Кто такой Фродо Бэггинс?', options: ['Хоббит', 'Эльф', 'Человек'], correctAnswer: 'Хоббит' },
           { question: 'Как называется гора, в которую нужно бросить Кольцо Всевластья?', options: ['Ородруин', 'Кара-дум', 'Гора Судьбы'], correctAnswer: 'Ородруин' },
           // Другие вопросы...
-        ]
+        ],
+        imageUrl: "/images/lord_of_the_rings_quiz.jpg"
       },
       3: {
         id: 3,
@@ -87,7 +90,8 @@ type Question = {
           { question: 'Кто является главным злодеем в "Звездных войнах"?', options: ['Дарт Вейдер', 'Император Палпатин', 'Кайло Рен'], correctAnswer: 'Дарт Вейдер' },
           { question: 'Как зовут злодея в "Гарри Поттере"?', options: ['Волдеморт', 'Снегг', 'Люциус Малфой'], correctAnswer: 'Волдеморт' },
           // Другие вопросы...
-        ]
+        ],
+        imageUrl: "/images/villains_quiz.jpg"
       }
 };
 
