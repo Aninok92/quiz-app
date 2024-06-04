@@ -23,7 +23,7 @@ const ResultPage = () => {
           <div key={index} className="mb-6">
             <h2 className="text-xl font-semibold mb-2">{question.question}</h2>
             <div className="flex items-center">
-              <p className="mr-2">Ваш ответ: {userAnswers[index]}</p>
+              <p className="mr-2">Ваш ответ: {userAnswers[index] || 'No Answer'}</p>
               {userAnswers[index] === question.correctAnswer ? (
                 <FaCheckCircle className="text-green-500" />
               ) : (
