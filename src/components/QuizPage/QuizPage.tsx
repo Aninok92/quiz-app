@@ -1,26 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { addResult } from '../../redux/quizSlice';
-import quizData, { Quiz } from '../../data/quizData';
 import Button from '../Button/Button';
 import PageTitle from '../PageTitle/PageTitle';
 import Container from '../Container/Container';
 import RadioInputField from '../RadioInputField/RadioInputField';
-import Timer from '../Timer/Timer'
+import Timer from '../Timer/Timer';
+import { fetchQuizById, Quiz } from '../../api';
 
 const QuizPage: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
-  const quiz: Quiz | undefined = quizData[quizId || "1"];
-  // if (!quizId || !quiz) {
-  //   return <div>Квиз не найден</div>;
-  // }
-
-  const [userAnswers, setUserAnswers] = useState<string[]>(Array(quiz.questions.length).fill(''));
+  const [quiz, setQuiz] = useState<Quiz | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: RootState) => state.user.isLoggedIn);
+
+  useEffect(() => {
+    const loadQuiz = async () => {
+      if (quizId) {
+        try {
+          const quizData = await fetchQuizById(quizId);
+          setQuiz(quizData);
+          setUserAnswers(Array(quizData.questions.length).fill(''));
+        } catch (err) {
+          setError('Failed to load quiz');
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+    loadQuiz();
+  }, [quizId]);
 
   const handleAnswerChange = (questionIndex: number, answer: string) => {
     const newAnswers = [...userAnswers];
@@ -29,21 +44,17 @@ const QuizPage: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    // if (!userAnswers) {
-    //   setUserAnswers(prev => [...prev], "нет овтета")
-    // }
-  
-    console.log("userAnswers", userAnswers)
-    const result = { quizId: quizId as string, quizTitle: quiz.title, userAnswers, totalQuestions: quiz.questions.length };
-
-    console.log('Saving result:', result);
-    console.log('User logged in:', isAuthenticated);
+    if (!quiz) return;
+    const result = {
+      quizId: quizId as string,
+      quizTitle: quiz.title,
+      userAnswers,
+      totalQuestions: quiz.questions.length,
+    };
 
     if (isAuthenticated) {
-      console.log('User is logged in, saving to Redux');
       dispatch(addResult(result));
     } else {
-      console.log('User is not logged in, saving to localStorage');
       localStorage.setItem('quizResult', JSON.stringify(result));
     }
     navigate(`/quizzes/${quizId}/result`, { state: { userAnswers, quiz } });
@@ -52,7 +63,19 @@ const QuizPage: React.FC = () => {
   const isQuizCompleted = userAnswers.every(answer => answer !== '');
 
   const expiryTimestamp = new Date();
-  expiryTimestamp.setMinutes(expiryTimestamp.getMinutes() + 1); 
+  expiryTimestamp.setMinutes(expiryTimestamp.getMinutes() + 1);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!quiz) {
+    return <div>Quiz not found</div>;
+  }
 
   return (
     <Container>
@@ -75,7 +98,7 @@ const QuizPage: React.FC = () => {
           ))}
         </div>
       ))}
-     <Button onClick={handleSubmit} disabled={!isQuizCompleted}>
+      <Button onClick={handleSubmit} disabled={!isQuizCompleted}>
         Результат
       </Button>
     </Container>
